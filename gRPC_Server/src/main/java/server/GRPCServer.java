@@ -20,6 +20,6 @@ public class GRPCServer {
 
         logger.info("Server started at port : " + server.getPort());
 
-        server.awaitTermination(60, TimeUnit.SECONDS);
+        server.awaitTermination(); //60, TimeUnit.SECONDS
     }
 }

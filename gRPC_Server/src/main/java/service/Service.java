@@ -70,12 +70,10 @@ public class Service extends studentGrpc.studentImplBase {
         String phone = request.getPhoneNumber();
         String password = request.getPassword();
 
-        System.out.println(regID);
         ResultSet resultSet = checkRegInfo(regID);
         resultSet.next();
 
         int exists = resultSet.getInt(1);
-        System.out.println(exists);
 
         Student.Reg_Response.Builder regResponse = new Student.Reg_Response.Builder();
 
@@ -109,11 +107,7 @@ public class Service extends studentGrpc.studentImplBase {
         Connection connection = getConnection(url, user, pass);
         Statement statement = connection.createStatement();
 
-        System.out.println("ChekingRegInfo....");
-
         String query = " SELECT EXISTS( SELECT registrationID FROM tbl_info WHERE registrationID = '"+regID+"'); " ;
-
-        System.out.println("Done checking");
 
         return statement.executeQuery(query);
     }
