@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+option java_package = "com.student.grpc";
+
+service student{
+  rpc login(LoginRequest) returns (Log_Response);
+  rpc Register(RegisterRequest) returns (Reg_Response);
+  rpc Logout(LogoutRequest) returns (Log_Response);
+}
+
+message LoginRequest {
+  int64 username = 1;
+  string password = 2;
+}
+
+message Log_Response{
+  string  response = 1;
+  int32 responseCode = 2;
+}
+
+message  RegisterRequest{
+  int64 registrationID = 1;
+  string studentName = 2;
+  string email = 3;
+  string phoneNumber= 4;
+  string password = 5;
+}
+message Reg_Response{
+  string response = 1;
+  int32  responseCode = 2;
+}
+
+message  LogoutRequest{ }
