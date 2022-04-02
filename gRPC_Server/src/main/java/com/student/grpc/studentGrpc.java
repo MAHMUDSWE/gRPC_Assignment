@@ -162,7 +162,7 @@ public final class studentGrpc {
     /**
      */
     public void register(com.student.grpc.Student.RegisterRequest request,
-        io.grpc.stub.StreamObserver<com.student.grpc.Student.Reg_Response> responseObserver) {
+        io.grpc.stub.StreamObserver<com.student.grpc.Student.Reg_Response> responseObserver) throws SQLException {
       asyncUnimplementedUnaryCall(getRegisterMethod(), responseObserver);
     }
 
@@ -358,8 +358,12 @@ public final class studentGrpc {
           }
           break;
         case METHODID_REGISTER:
-          serviceImpl.register((com.student.grpc.Student.RegisterRequest) request,
-              (io.grpc.stub.StreamObserver<com.student.grpc.Student.Reg_Response>) responseObserver);
+          try {
+            serviceImpl.register((Student.RegisterRequest) request,
+                (io.grpc.stub.StreamObserver<Student.Reg_Response>) responseObserver);
+          } catch (SQLException e) {
+            e.printStackTrace();
+          }
           break;
         case METHODID_LOGOUT:
           serviceImpl.logout((com.student.grpc.Student.LogoutRequest) request,

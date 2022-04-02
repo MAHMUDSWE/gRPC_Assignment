@@ -2599,7 +2599,7 @@ public final class Student {
       }
 
       // Construct using com.student.grpc.Student.Reg_Response.newBuilder()
-      private Builder() {
+      public Builder() {
         maybeForceBuilderInitialization();
       }
 
