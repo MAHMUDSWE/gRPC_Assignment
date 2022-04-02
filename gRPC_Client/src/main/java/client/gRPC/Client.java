@@ -23,17 +23,74 @@ public class Client {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        System.out.print("Enter userID: ");
-        long userID = Long.parseLong(br.readLine());
+        int choice;
+        do
+        {
+            System.out.println("Press 1 to Register.");
+            System.out.println("Already have an Account?\nPress 2 to Log in. ");
 
-        System.out.print("Enter password: ");
-        String password = br.readLine();
+            System.out.print("Choose: ");
+            choice = Integer.parseInt(br.readLine());
 
-        Student.LoginRequest request = Student.LoginRequest.newBuilder().setUsername(userID).setPassword(password).build();
+            switch (choice)
+            {
+                case 2:
+                {
+                    System.out.print("Enter userID: ");
+                    long userID = Long.parseLong(br.readLine());
 
-        Student.Log_Response response = studentStub.login(request);
+                    System.out.print("Enter password: ");
+                    String loginPassword = br.readLine();
 
-        logger.info("\n" + response.getResponseCode() + "\n" + response.getResponse());
+                    Student.LoginRequest loginRequest = Student.LoginRequest.newBuilder().setUsername(userID).setPassword(loginPassword).build();
+
+                    Student.Log_Response loginResponse = studentStub.login(loginRequest);
+
+                    //logger.info("\n" + loginResponse.getResponseCode() + "\n" + loginResponse.getResponse());
+                    System.out.println(loginResponse.getResponseCode()+ "\n" + loginResponse.getResponse() +"\n");
+
+                    if (loginResponse.getResponseCode() == 200)
+                    {
+                        choice = 3;
+                    }
+                }
+
+                break ;
+
+                case 1:
+                {
+                    System.out.print("Enter RegistrationID: ");
+                    long regID = Long.parseLong(br.readLine());
+
+                    System.out.print("Enter Name: ");
+                    String studentName = br.readLine();
+
+                    System.out.print("Enter Email: ");
+                    String email = br.readLine();
+
+                    System.out.print("Enter Phone Number: ");
+                    String phone = br.readLine();
+
+                    System.out.print("Enter Password: ");
+                    String password = br.readLine();
+
+                    Student.RegisterRequest regRequest = Student.RegisterRequest.newBuilder().setRegistrationID(regID).setStudentName(studentName)
+                            .setEmail(email).setPhoneNumber(phone).setPassword(password).build();
+
+                    Student.Reg_Response regResponse =  studentStub.register(regRequest);
+
+                    //logger.info("\n" + regResponse.getResponseCode() + "\n" + regResponse.getResponse() );
+                    System.out.println(regResponse.getResponseCode()+ "\n" + regResponse.getResponse() +"\n") ;
+                }
+                break;
+
+                default:
+                {
+
+                }
+                break;
+        }
+        }while(choice != 3 );
 
     }
 }
