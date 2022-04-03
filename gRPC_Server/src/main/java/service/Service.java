@@ -28,9 +28,9 @@ public class Service extends studentGrpc.studentImplBase {
 
         int exists = resultSet.getInt(1);
 
-        System.out.println(userName);
+       // System.out.println(userName);
 
-        System.out.println(password);
+        //System.out.println(password);
 
         Student.Log_Response.Builder response = new Student.Log_Response.Builder();
 
